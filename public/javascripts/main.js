@@ -10,22 +10,34 @@ function toggleFullScreen() {
 
     if(!$(".header").hasClass("fullScreen")){
         $(".header").addClass("fullScreen");
+        setTimeout(function(){
+            $("#btnShowBarr").show();
+        },1000)
+        
+        
         _header.height = 0 ;
         fullScreen = true;
     }else{
+        $("#btnShowBarr").hide();
         $(".header").removeClass("fullScreen");
+        
         fullScreen = false;
         _header.height = 72 ;
     }
 }
 function showHeader(){
+    $("#btnShowBarr").hide();
     $(".header").removeClass("fullScreen");
+    
     fullScreen = false;
     _header.height = 72 ;
         
 }
 function toFullScreen(){
     $(".header").addClass("fullScreen");
+    setTimeout(function(){
+            $("#btnShowBarr").show();
+        },1000)
         fullScreen = true;
         _header.height = 0 ;
 }
@@ -80,7 +92,7 @@ function toFullScreen(){
         })
         var canalesJSON = "http://ext.juicedev.me/TV/TV.json";
         $.getJSON(canalesJSON,function(tv){
-            debu
+       
         })
         setInterval(function(){
             if(move == false){
@@ -90,6 +102,9 @@ function toFullScreen(){
             }
             move = false;
         },3000)
+        $("#btnShowBarr").click(function(){
+            showHeader();
+        });
         $(document).mouseover(function(){
             move = true;
         })

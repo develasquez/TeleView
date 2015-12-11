@@ -38,3 +38,7 @@ body:full-screen{
 .test_box img{
 	height:100%;
 }
+#btnShowBarr{
+	position: absolute;
+	display:none;
+}
