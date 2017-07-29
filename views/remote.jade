@@ -37,7 +37,7 @@ html
             div
               h3 Canales
               p Lista Canales
-        li(onclick="monomer.pageShow('#busqueda');")
+        li(onclick="monomer.pageShow('#youtube');")
           div
             div.test_box.fab.z-d1
               i.icon-youtube.icon-1x.icon-black
@@ -45,13 +45,21 @@ html
             div
               h3 YouTube
               p Buscar en Youtube
+        li(onclick="monomer.pageShow('#peliculas');")
+          div
+            div.test_box.fab.z-d1
+              i.icon-youtube.icon-1x.icon-black
+          div
+            div
+              h3 Peliculas
+              p HD Movies
     #Remoto.page
       .header.green.z-d1
         button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
         h3.color-white Control Remoto
       .content
         ul#canales.list.advanced.divider
-    #busqueda.page
+    #youtube.page
       .header.green.z-d1
         button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
         h3.color-white RemoTube
@@ -61,5 +69,14 @@ html
         br
         button#btnBuscar.floating-button.floating-down-right.green.expand-search(onclick='buscarVideos();')
           i.icon-search.icon-white
-
+    #peliculas.page
+      .header.green.z-d1
+        button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
+        h3.color-white Peliculas
+        input#txtBuscarMovies.search-input(type='search', autofocus='')
+      .content
+        ul#Movies.list.advanced.divider
+        br
+        button#btnBuscarMovies.floating-button.floating-down-right.green.expand-search(onclick='buscarPeliculas();')
+          i.icon-search.icon-white
 

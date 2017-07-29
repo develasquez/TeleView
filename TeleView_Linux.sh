@@ -1,11 +1,8 @@
 #!/bin/bash
 echo Cerraremos Google Chrome
 
-killall Google\ Chrome
+pkill chrome
+nohup node bin/www > teleview.log & 
+google-chrome --args --disable-web-security http://localhost:3000 --start-fullscreen 
 
-open -a Google\ Chrome --args --disable-web-security --allow-insecure-localhost --allow-running-insecure-content --reduce-security-for-testing --app="http://localhost:3000" --start-fullscreen
 
-
-echo Abrimos Chrome en modo Promiscuo
-
-bin/Linux/node bin/www

@@ -1,6 +1,8 @@
 var isFullScreen = false;
-    var socket ={};
+var socket ={};
 var canal = 0;
+var MOVIE = "Movie";
+var moviesEndpoint = "http://hdfull.tv/ajax/search.php?q=";
     getNombre = function(url){
       var nombre = url.split("/")[url.split("/").length -1].replace(".html","").replace(/-/g," ").toUpperCase();
       if(nombre.split("|").length > 0){
@@ -39,7 +41,7 @@ var canal = 0;
             }
         }
 canales = [
-["http://mdstrm.com/live-stream/525431f81bc42c4539000057?jsapi=true&autoplay=true&v=1.52.12&ref=mdstrm.com#TVN|1.52.12|TVN","https://pbs.twimg.com/profile_images/2609853665/47fv7lbglyncfopqx1ox_400x400.jpeg"],
+    ["http://mdstrm.com/live-stream/525431f81bc42c4539000057?jsapi=true&autoplay=true&v=1.52.12&ref=mdstrm.com#TVN|1.52.12|TVN","https://pbs.twimg.com/profile_images/2609853665/47fv7lbglyncfopqx1ox_400x400.jpeg"],
     ["http://ext.juicedev.me/TV/index.html#Canal_13|1.52.12|Canal 13","http://ext.juicedev.me/TV/logos/13.png"],
     ["http://ext.juicedev.me/TV/index.html#Canal_13C|1.52.12|13C","http://ext.juicedev.me/TV/logos/13c.png"],
     ["http://ext.juicedev.me/TV/index.html#CHV|1.52.12|CHV","http://ext.juicedev.me/TV/logos/chv-2015.png"],
@@ -233,6 +235,11 @@ function init() {
           $("#btnBuscar").click();
         }
       });
+      $("#txtBuscarMovies").on("keypress",function(evt){
+        if(evt.charCode == 13){
+          $("#btnBuscarMovies").click();
+        }
+      });
       listas = localStorage.getItem("listas") || [];
       actualizarListas();
       $(".content").on("scroll",function (a,b) {
@@ -260,7 +267,24 @@ function init() {
         '</li>',
         ].join("\n");
       };
-      
+        var listItemM = function(data){
+        return [
+          '<li>',
+            '<div>',
+              '<div class="test_box fab z-d1">',
+                '<img src="' + data.image + '" alt="' + data.title + '"> ',
+               '</div>',
+            '</div>',
+            '<div>',
+              '<div>',
+                '<h3>' + data.title + '</h3>',
+              '</div>',
+              //'<span class="expand-config button-right icon-ellipsis-v icon-1x icon-black trackOptions" target=".configMenu">',
+              '</span>',
+            '</div>',
+        '</li>',
+        ].join("\n");
+      };    
       var resp = {};
 
       function getVideoDetails (item, _fun) {
@@ -305,7 +329,7 @@ function init() {
                   $(newVideo).delegate( ".trackOptions", "click", function(a,b,c) {
                       currentOptionPressed = $(a.originalEvent.currentTarget).data("data");
                   });          
-                  $('#info').append(newVideo);
+                  $(el).append(newVideo);
                 }
                 if(currentItemProcessing == totalItemsToList){
                     monomer.__init();
@@ -321,7 +345,7 @@ function init() {
           }
         }
 
-      function buscarVideos(PageToken) {
+    function buscarVideos(PageToken) {
         if($("#txtBuscar").val() == ""){
           return false;
         }
@@ -360,8 +384,8 @@ function init() {
             }
 
             });
-          }
-      function actualizarListasPopup () {
+    }
+    function actualizarListasPopup () {
         try{
           $("#ListasReprododuccionLst").html("");
           for (var i = 0; i < listas.length; i++) {
@@ -375,12 +399,12 @@ function init() {
             }
           monomer.refresh();
         }catch(ex){}
-      }
-      function actualizarListas(){
+    }
+    function actualizarListas(){
           actualizarListasPage();
           actualizarListasPopup();
-      }
-      function actualizarListasPage () {
+    }
+    function actualizarListasPage () {
           //Actualiza en pagina
           $("#dvListas").html("");
           for (var i = 0; i < listas.length; i++) {
@@ -408,5 +432,35 @@ function init() {
 
             }
           }
-      }
-     
+    }
+    function buscarPeliculas () {
+        var q = $("#txtBuscarMovies").val();
+        $.ajax(moviesEndpoint + q)
+            .done(function (data) {
+                if(data.length == 0 && data.meta !== MOVIE){
+                    return;
+                }
+                data = JSON.parse(data);
+                $.each(data,function(index,item){
+                    var newVideo = $(listItemM(item));
+                    $(newVideo).data("data",JSON.stringify(item))
+                    $(newVideo).on("click", function(a) {
+                        debugger;
+                        var permlalink= JSON.parse($(a.originalEvent.currentTarget).data("data")).permalink;
+                        $.ajax(permlalink)
+                        .done(function(theHtml){
+                            eval($(theHtml).find("script:contains('embeds')").text());
+                            var latinas = $(theHtml).find(".embed-selector[style*='lat.png']")
+                            $.each(latinas,function(i,e){
+                                var peli ={};
+                                var peli.videoId = $(el).prev().find(".embed-container").data("videoid"); 
+                                var peli.titlec = $(el).text().replace(/\s+/g,'').split(":")[3].replace("Enlaceexterno","")
+                            })
+                            debugger;
+                        })
+                        
+                    });          
+                    $("#Movies").append(newVideo);
+                })
+            })   
+    }

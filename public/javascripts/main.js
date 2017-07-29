@@ -1,5 +1,5 @@
 //jwplayer.key = "EHq+jIbRBPIR3wc5YyWUY4ZJch1b0AFUno8mPa2CHfc="
-
+//phimhnckkaofkllcoledjilakgbeohli
 //https://chrome.google.com/webstore/detail/tv-y-radios-de-chile/phimhnckkaofkllcoledjilakgbeohli
 var canal = 0;
 var youtube = false;
@@ -180,7 +180,7 @@ canales = [
     ["http://mdstrm.com/live-stream/525431f81bc42c4539000057?jsapi=true&autoplay=true&v=1.52.12&ref=mdstrm.com#TVN|1.52.12|TVN","https://pbs.twimg.com/profile_images/2609853665/47fv7lbglyncfopqx1ox_400x400.jpeg"],
     ["http://ext.juicedev.me/TV/index.html#Canal_13|1.52.12|Canal 13","http://ext.juicedev.me/TV/logos/13.png"],
     ["http://ext.juicedev.me/TV/index.html#Canal_13C|1.52.12|13C","http://ext.juicedev.me/TV/logos/13c.png"],
-    ["http://ext.juicedev.me/TV/index.html#CHV|1.52.12|CHV","http://ext.juicedev.me/TV/logos/chv-2015.png"],
+    ["http://ext.juicedev.me/MonkiTV.2.0.2/#Canal-CHV-CHV-2.0.7","http://ext.juicedev.me/TV/logos/chv-2015.png"],
     ["http://ext.juicedev.me/TV/index.html#Mega|1.52.12|Mega","http://ext.juicedev.me/TV/logos/mega2015.png"],
     ["http://ext.juicedev.me/TV/index.html#CNN_Chile|1.52.12|CNN Chile","http://ext.juicedev.me/TV/logos/cnnchile.png"],
     ["http://ext.juicedev.me/TV/index.html#UCV|1.52.12|UCV","http://ext.juicedev.me/TV/logos/ucv-2.png"],
