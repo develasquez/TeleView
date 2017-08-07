@@ -64,7 +64,7 @@ function toFullScreen(){
         if(typeof(p_canal) == "number"){
             canal = p_canal;
             localStorage.setItem("canal",canal);      
-            source =canales[canal][0];
+            source =0;//canales[canal][0];
             youtube = false;
         }else{
             youtube = true;
@@ -74,7 +74,7 @@ function toFullScreen(){
       $("#tele").html("").append($(iframe).attr("src",source));
       
 
-      $(".canal").text(getNombre(canales[canal][0]));
+      $(".canal").text(getNombre(""));//canales[canal][0]
       monomer.__setAspect();
       toFullScreen();
     }
