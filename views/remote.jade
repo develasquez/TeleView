@@ -45,20 +45,14 @@ html
             div
               h3 YouTube
               p Buscar en Youtube
-        li(onclick="monomer.pageShow('#peliculas');")
+        li(onclick="stopVideo();")
           div
             div.test_box.fab.z-d1
-              i.icon-youtube.icon-1x.icon-black
+              i.icon-pause.icon-1x.icon-black.control
           div
             div
-              h3 Peliculas
-              p HD Movies
-    #Remoto.page
-      .header.green.z-d1
-        button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
-        h3.color-white Control Remoto
-      .content
-        ul#canales.list.advanced.divider
+              h3.controlTitle Pause
+              p.controlDetalle Detener Video
     #youtube.page
       .header.green.z-d1
         button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
@@ -69,6 +63,12 @@ html
         br
         button#btnBuscar.floating-button.floating-down-right.green.expand-search(onclick='buscarVideos();')
           i.icon-search.icon-white
+    #Remoto.page
+      .header.green.z-d1
+        button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
+        h3.color-white Control Remoto
+      .content
+        ul#canales.list.advanced.divider
     #peliculas.page
       .header.green.z-d1
         button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')

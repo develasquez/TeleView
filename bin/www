@@ -43,6 +43,9 @@ io.on('connection', function(socket){
   socket.on('hideQr', function(){
     io.emit('hideQr');
   });
+  socket.on('toggleYoutube', function(acction){
+    io.emit('toggleYoutube', acction);
+  });
 });
 /**
  * Normalize a port into a number, string, or false.

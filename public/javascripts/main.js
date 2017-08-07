@@ -6,6 +6,12 @@ var youtube = false;
 var move = true;
 var fullScreen = false;
 
+
+    
+    
+    
+
+
 function toggleFullScreen() {
 
     if(!$(".header").hasClass("fullScreen")){
@@ -64,7 +70,7 @@ function toFullScreen(){
         if(typeof(p_canal) == "number"){
             canal = p_canal;
             localStorage.setItem("canal",canal);      
-            source =0;//canales[canal][0];
+            source = "";//canales[canal][0];
             youtube = false;
         }else{
             youtube = true;
@@ -83,25 +89,26 @@ function toFullScreen(){
         socket.on('cambiarCanal', function(canal){
           setUrl(canal)
         });
+
+        socket.on('toggleYoutube', function(acction){
+            var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+            iframe.postMessage('{"event":"command","func":"' + acction + '","args":""}', '*');
+        });
         socket.on('fullScreen',function(){
-        
           toggleFullScreen();
-        })
+        });
         socket.on('hideQr',function(){
           hideQr();
-        })
-        var canalesJSON = "http://ext.juicedev.me/TV/TV.json";
-        $.getJSON(canalesJSON,function(tv){
-       
-        })
-        setInterval(function(){
+        });
+
+       /* setInterval(function(){
             if(move == false){
                 toFullScreen()
             }else{
                 showHeader();
             }
             move = false;
-        },3000)
+        },3000)*/
         $("#btnShowBarr").click(function(){
             showHeader();
         });
@@ -133,46 +140,8 @@ function toFullScreen(){
         }
       });
       setInterval(function(){
-        var elIframe = $("#ifTV").contents();
-        var height = _window.height  - _footer.height - _header.height;
-        $("#Tele, #tele , #ifTV").width("100%").height(height).css("max-height",height+"px");
-
-        if(youtube){
-            return;    
-        }
-        
-        $($("#ifTV")[0].contentDocument).find("iframe, embed").width("100%").height(height).css("max-height",height+"px");;
-        var elIframeContent = elIframe.find("iframe");
-
-        if(canal < 69 ){
-          return;
-        }
-        
-        var src = elIframe.find("iframe").attr("src")
-        if( src.length > 0 && src.indexOf("http://www.mipsplayer.com/embedplayer")> -1 && src.indexOf(window.innerWidth.toString()) == -1  ) {
-           
-           elIframe.find("*").width("100%");
-            var url = elIframe.find("iframe").attr("src").split("/");
-            url[url.length -1] = _window.height  - _footer.height;
-            url[url.length -2] = window.innerWidth;
-            
-            elIframe.find("iframe").attr("src",url.join("/"));
-        }
-        virtualIframe = $(elIframe).contents().find("font > iframe");
-        $(virtualIframe).find("iframe, embed").width("100%").height(height).css("max-height",height+"px");;
-        if($(elIframe).contents().find("font").text().length > 0){
-            $(elIframe).contents().find("font").text("");
-            $(elIframe).contents().find("font").parent().append(virtualIframe);    
-        }
-        [].forEach.call(elIframe.find("noscript,h1,h2,br,p,script,a,div:not(#contenedor)"),function(el){
-          try{el.remove()}catch(ex){}
-        });
-        [].forEach.call(elIframeContent, function(el){
-
-          [].forEach.call($(el).contents().find("noscript,h1,h2,br,p,script,a,div:not(.player_div, #flashcontent, #mvnVideo>div)"),function(el){
-          try{el.remove()}catch(ex){}
-        });
-        });
+        var height = _window.height - _header.height;
+        $("#ifTV").width("100%").height(height).css("max-height",height+"px");
       },500);
     })
 
