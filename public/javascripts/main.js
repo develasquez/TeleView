@@ -177,7 +177,7 @@ function toFullScreen(){
     })
 
 canales = [
-    ["http://mdstrm.com/live-stream/525431f81bc42c4539000057?jsapi=true&autoplay=true&v=1.52.12&ref=mdstrm.com#TVN|1.52.12|TVN","https://pbs.twimg.com/profile_images/2609853665/47fv7lbglyncfopqx1ox_400x400.jpeg"],
+/*    ["http://mdstrm.com/live-stream/525431f81bc42c4539000057?jsapi=true&autoplay=true&v=1.52.12&ref=mdstrm.com#TVN|1.52.12|TVN","https://pbs.twimg.com/profile_images/2609853665/47fv7lbglyncfopqx1ox_400x400.jpeg"],
     ["http://ext.juicedev.me/TV/index.html#Canal_13|1.52.12|Canal 13","http://ext.juicedev.me/TV/logos/13.png"],
     ["http://ext.juicedev.me/TV/index.html#Canal_13C|1.52.12|13C","http://ext.juicedev.me/TV/logos/13c.png"],
     ["http://ext.juicedev.me/MonkiTV.2.0.2/#Canal-CHV-CHV-2.0.7","http://ext.juicedev.me/TV/logos/chv-2015.png"],
@@ -308,7 +308,7 @@ canales = [
     ["http://tvpor-internet.com/el-trece-en-vivo.html","http://i627.photobucket.com/albums/tt354/jugo_xD/canales/tv.png"],
     ["http://tvpor-internet.com/ALF-en-vivo.html","http://i627.photobucket.com/albums/tt354/jugo_xD/canales/tv.png"],
     ["http://tvpor-internet.com/aye-en-vivo.html","http://i627.photobucket.com/albums/tt354/jugo_xD/canales/tv.png"],
-    ["http://tvpor-internet.com/Telehit-en-vivo.html","http://i627.photobucket.com/albums/tt354/jugo_xD/canales/tv.png"],
+    ["http://tvpor-internet.com/Telehit-en-vivo.html","http://i627.photobucket.com/albums/tt354/jugo_xD/canales/tv.png"],*/
   ]
 
 
