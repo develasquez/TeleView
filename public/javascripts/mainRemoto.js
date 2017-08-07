@@ -329,7 +329,7 @@ function init() {
                   $(newVideo).delegate( ".trackOptions", "click", function(a,b,c) {
                       currentOptionPressed = $(a.originalEvent.currentTarget).data("data");
                   });          
-                  $(el).append(newVideo);
+                  $("#info").append(newVideo);
                 }
                 if(currentItemProcessing == totalItemsToList){
                     monomer.__init();
@@ -453,8 +453,8 @@ function init() {
                             var latinas = $(theHtml).find(".embed-selector[style*='lat.png']")
                             $.each(latinas,function(i,e){
                                 var peli ={};
-                                var peli.videoId = $(el).prev().find(".embed-container").data("videoid"); 
-                                var peli.titlec = $(el).text().replace(/\s+/g,'').split(":")[3].replace("Enlaceexterno","")
+                                peli.videoId = $(el).prev().find(".embed-container").data("videoid"); 
+                                peli.titlec = $(el).text().replace(/\s+/g,'').split(":")[3].replace("Enlaceexterno","")
                             })
                             debugger;
                         })
