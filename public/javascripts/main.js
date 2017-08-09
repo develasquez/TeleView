@@ -120,7 +120,7 @@ function toFullScreen(){
             try{
             var obj ={
                 canal: c,
-                nombre :getNombre(canales[c][0]),
+                nombre :getNombre(canales[c][0]).replace(/ /g,'_'),
                 img : canales[c][1]
             }    
             $("#canales").append(listItem(obj));
