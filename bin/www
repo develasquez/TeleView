@@ -46,6 +46,12 @@ io.on('connection', function(socket){
   socket.on('toggleYoutube', function(acction){
     io.emit('toggleYoutube', acction);
   });
+  socket.on('video', function(videoUrl){
+    io.emit('video', videoUrl);
+  });
+  socket.on('tele', function(){
+    io.emit('tele');
+  });
 });
 /**
  * Normalize a port into a number, string, or false.
@@ -105,13 +111,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-
-	var chromeLauncher = require('chrome-launcher');
- 
-	chromeLauncher.launch({
-		startingUrl: 'http://localhost:3000',
-		chromeFlags: ['--headless', '--disable-gpu']
-	}).then(function(chrome) {
-	  console.log(chrome.port);
-	});
 }

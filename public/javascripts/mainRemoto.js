@@ -19,7 +19,16 @@ $(function() {
 
 });
 
+openMovie = function(){
+    monomer.showDialog("#urlPelicula");
+};
 
+playMovie = function(){
+    debugger;
+    var urlPelicula = $("#txtUrlPelicula").val();
+    socket.emit('video', urlPelicula);
+    monomer.hideDialog("#urlPelicula"); 
+}
 setUrl = function(canal) {
     socket.emit('cambiarCanal', canal);
 }

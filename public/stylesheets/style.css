@@ -2,6 +2,10 @@
 	visibility: hidden;
 	display: none;
 }
+#Tele {
+	display: flex !important;
+	background-color: black;
+}
 
 .test_box.fab.z-d1 img {
     width: 100%;

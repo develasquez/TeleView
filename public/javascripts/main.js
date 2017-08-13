@@ -30,6 +30,8 @@ function toggleFullScreen() {
         fullScreen = false;
         _header.height = 72 ;
     }
+    var video = document.getElementsByTagName("video")[0];
+    video.webkitRequestFullScreen();
 }
 function showHeader(){
     $("#btnShowBarr").hide();
@@ -85,14 +87,26 @@ function toFullScreen(){
       toFullScreen();
     }
     $(function(){
+
         var socket = io();
         socket.on('cambiarCanal', function(canal){
           setUrl(canal)
         });
 
         socket.on('toggleYoutube', function(acction){
-            var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
-            iframe.postMessage('{"event":"command","func":"' + acction + '","args":""}', '*');
+            var video = document.getElementsByTagName("video")[0];
+            if (!video){
+
+                var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+                iframe.postMessage('{"event":"command","func":"' + acction + '","args":""}', '*');
+            }else{
+                if(!video.paused){
+                    video.pause();
+                }else{
+                    video.play();
+                }
+            }
+
         });
         socket.on('fullScreen',function(){
           toggleFullScreen();
@@ -100,7 +114,12 @@ function toFullScreen(){
         socket.on('hideQr',function(){
           hideQr();
         });
-
+        socket.on('video',function(videoUrl){
+          document.location.href = "/video/" +  encodeURIComponent(videoUrl);
+        });
+        socket.on('tele',function(videoUrl){
+          document.location.href = "/";
+        });
        /* setInterval(function(){
             if(move == false){
                 toFullScreen()

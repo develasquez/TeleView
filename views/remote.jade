@@ -45,6 +45,14 @@ html
             div
               h3 YouTube
               p Buscar en Youtube
+        li(onclick="openMovie();")
+          div
+            div.test_box.fab.z-d1
+              i.icon-film.icon-1x.icon-black.control
+          div
+            div
+              h3.controlTitle Pelicula
+              p.controlDetalle URL de Pelisplus
         li(onclick="stopVideo();")
           div
             div.test_box.fab.z-d1
@@ -53,6 +61,12 @@ html
             div
               h3.controlTitle Pause
               p.controlDetalle Detener Video
+    #urlPelicula.modal-dialog.fade.card.background_control.z-d3
+      .header
+        h2.color-light-blue.center Ver Pelicula
+      input#txtUrlPelicula(type='text')
+      label(for='txtUrlPelicula') Url pelicula pelisplus.com
+      button.raised-button.green.color-white(onclick='playMovie();') Reproducir
     #youtube.page
       .header.green.z-d1
         button.expand-LeftMenu.button-left.icon-bars.icon-1x.icon-white(arrows-alt='')
