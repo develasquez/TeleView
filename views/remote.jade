@@ -9,11 +9,11 @@ html
     meta(name='mobile-web-app-capable', content='yes')
     link(href='/stylesheets/monomer.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
-    script(src='javascripts/vendor/jquery-2.1.3.min.js')
-    script(src='javascripts/vendor/pointerevents.js', type='text/javascript')
-    script(src='javascripts/vendor/monomer.js', type='text/javascript')
+    script(src='/javascripts/vendor/jquery-2.1.3.min.js')
+    script(src='/javascripts/vendor/pointerevents.js', type='text/javascript')
+    script(src='/javascripts/vendor/monomer.js', type='text/javascript')
     script(src='/socket.io/socket.io.js', type='text/javascript')
-    script(src='javascripts/mainRemoto.js', type='text/javascript')
+    script(src='/javascripts/mainRemoto.js', type='text/javascript')
     script(src="https://apis.google.com/js/client.js?onload=init")
     meta(http-equiv='Cache-Control', content='no-cache')
     meta(http-equiv='Pragma', content='no-cache')
@@ -65,7 +65,6 @@ html
       .header
         h2.color-light-blue.center Ver Pelicula
       input#txtUrlPelicula(type='text')
-      label(for='txtUrlPelicula') Url pelicula pelisplus.com
       button.raised-button.green.color-white(onclick='playMovie();') Reproducir
     #youtube.page
       .header.green.z-d1

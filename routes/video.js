@@ -7,7 +7,13 @@ router.get('/:video', function(req, res, next) {
 	var video = req.params.video;
 	request(video, function(err, data, body) {
 		$ = cheerio.load(body);
-		var videoUrl = $("video").attr("src");
+		var regExpMovie = new RegExp(/\/\/streamango\.com\/v\/d\/[0-9a-zA-Z\/\.\~]{1,2255}/);
+		var videoUrl = $("video").attr("src") || "";
+
+		if(videoUrl.length === 0){
+			videoUrl = body.match(regExpMovie).filter(function(el){ return el.length > 0})[0] || "" ;			
+		}
+
 		res.render('video', {
 			video: videoUrl
 		});
