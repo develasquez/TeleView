@@ -16,6 +16,9 @@ getNombre = function(url) {
 $(function() {
     socket = io();
     socket.emit('hideQr');
+    socket.on("end", function (id) {
+        playSong(JSON.stringify({id:{videoId: $("#" + id).next().attr("id")}}));
+    });
 
 });
 
@@ -24,7 +27,7 @@ openMovie = function(){
 };
 
 playMovie = function(){
-    debugger;
+    
     var urlPelicula = $("#txtUrlPelicula").val();
     socket.emit('video', urlPelicula);
     monomer.hideDialog("#urlPelicula"); 
@@ -102,7 +105,7 @@ function init() {
         });
 
         $.get("http://ext.juicedev.me/MonkiTV/Canales.json", function(data) {
-            debugger;
+            
             canales = data;
             for (c in canales) {
                 try {
@@ -198,8 +201,8 @@ function getVideoDetails(item, _fun) {
 function playSong(item) {
     localStorage.setItem("currentPlayer", item);
     var video = JSON.parse(item).id.videoId;
-    var nuevaUrl = "https://www.youtube.com/embed/" + video + "?&autoplay=true&hd=1&quality=high&version=3&vq=highres&enablejsapi=1";
-    setUrl(nuevaUrl);
+    //var nuevaUrl = "https://www.youtube.com/embed/" + video + "?&autoplay=true&hd=1&quality=high&version=3&vq=highres&enablejsapi=1";
+    setUrl(video);
 }
 
 var totalItemsToList = 0;
@@ -344,7 +347,7 @@ function buscarPeliculas() {
                 var newVideo = $(listItemM(item));
                 $(newVideo).data("data", JSON.stringify(item))
                 $(newVideo).on("click", function(a) {
-                    debugger;
+                    
                     var permlalink = JSON.parse($(a.originalEvent.currentTarget).data("data")).permalink;
                     $.ajax(permlalink)
                         .done(function(theHtml) {
@@ -355,7 +358,7 @@ function buscarPeliculas() {
                                 peli.videoId = $(el).prev().find(".embed-container").data("videoid");
                                 peli.titlec = $(el).text().replace(/\s+/g, '').split(":")[3].replace("Enlaceexterno", "")
                             })
-                            debugger;
+                            
                         })
 
                 });
