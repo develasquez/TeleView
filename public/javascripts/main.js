@@ -6,11 +6,11 @@ var youtube = false;
 var move = true;
 var fullScreen = false;
 
-
-    
-    
-    
-
+function changeBackgroud() {
+    setInterval(function () {
+        $("#tele").css("background","url('https://picsum.photos/1920/1080/?random&r="+ parseInt(Math.random() * 1000) +"')");
+    },60 * 1000)
+}
 
 function toggleFullScreen() {
 
@@ -87,7 +87,7 @@ function toFullScreen(){
       toFullScreen();
     }
     $(function(){
-
+        changeBackgroud();
         var socket = io();
         socket.on('cambiarCanal', function(canal){
           setUrl(canal)

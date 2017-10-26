@@ -9,6 +9,9 @@
 
 #tele {
 	width: 100%;
+	background: url('https://picsum.photos/1920/1080/?random');
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 .test_box.fab.z-d1 img {
     width: 100%;
