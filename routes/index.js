@@ -31,7 +31,7 @@ Object.keys(ifaces).forEach(function (ifname) {
 
 var qr = "http://chart.apis.google.com/chart?cht=qr&chl="+ ip +"%3A3000%2Fremoto&chs=256x256";
 
-res.render('index', { title: 'Express' , qr: qr});
+res.render('index', { title: 'Express' , qr: qr, ip: ip});
 
 });
 

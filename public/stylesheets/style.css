@@ -45,7 +45,7 @@ body:full-screen{
 #popupQr{
 	z-index: 5000;
 	width:260px;
-	height:260px;
+	height:290px;
 	overflow: hidden;
 	text-align: center;
 }

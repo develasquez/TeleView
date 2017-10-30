@@ -78,6 +78,8 @@ setUrl = function(p_canal) {
         source = ""; //canales[canal][0];
         youtube = false;
         $("#tele").append($(iframe).attr("src", source));
+        $(".canal").text(getNombre("")); //canales[canal][0]
+        monomer.__setAspect();
     } else {
         youtube = true;
         $("#tele").append($("<div class=\"aspect_16_9\">").attr("id","player"));
@@ -100,14 +102,13 @@ setUrl = function(p_canal) {
     }
 
 
-    $(".canal").text(getNombre("")); //canales[canal][0]
-    monomer.__setAspect();
+
     toFullScreen();
 }
 var player;
 var socket;
 $(function() {
-
+    showQr();
 
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
@@ -119,10 +120,12 @@ $(function() {
     changeBackgroud();
     socket = io();
     socket.on('cambiarCanal', function(canal) {
+        hideQr();
         setUrl(canal)
     });
 
     socket.on('toggleYoutube', function(acction) {
+        hideQr();
         var video = document.getElementsByTagName("video")[0];
         if (!video) {
 
@@ -144,9 +147,11 @@ $(function() {
         hideQr();
     });
     socket.on('video', function(videoUrl) {
+        hideQr();
         document.location.href = "/video/" + encodeURIComponent(videoUrl);
     });
     socket.on('tele', function(videoUrl) {
+        hideQr();
         document.location.href = "/";
     });
     /* setInterval(function(){
