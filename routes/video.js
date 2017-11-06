@@ -10,8 +10,10 @@ router.get('/:video', function(req, res, next) {
 		var regExpMovie = new RegExp(/\/\/streamango\.com\/v\/d\/[0-9a-zA-Z\/\.\~]{1,2255}/);
 		var videoUrl = $("video").attr("src") || "";
 
-		if(videoUrl.length === 0){
-			videoUrl = body.match(regExpMovie).filter(function(el){ return el.length > 0})[0] || "" ;			
+		if (videoUrl.length === 0) {
+			videoUrl = body.match(regExpMovie).filter(function(el) {
+				return el.length > 0
+			})[0] || "";
 		}
 
 		res.render('video', {
@@ -22,5 +24,15 @@ router.get('/:video', function(req, res, next) {
 
 });
 
+router.get('/', function(req, res, next) {
+
+
+	res.render('video', {
+		video: null
+	});
+
+
+
+});
 
 module.exports = router;

@@ -15,20 +15,21 @@ html
     script(src='/socket.io/socket.io.js', type='text/javascript')
     script(src='/javascripts/mainRemoto.js', type='text/javascript')
     script(src="https://apis.google.com/js/client.js?onload=init")
+    script(src='javascripts/cast.js', type='text/javascript')
     meta(http-equiv='Cache-Control', content='no-cache')
     meta(http-equiv='Pragma', content='no-cache')
     meta(http-equiv='Expires', content='0')
   body
     nav.leftMenu.z-d1.background_control
       ul.list.advanced
-        li(onclick="fullScreen();")
+        li#cast
           div
             div.test_box.fab.z-d1
-              i.icon-expand.icon-1x.icon-black
+              i.icon-desktop.icon-1x.icon-black
           div
             div
-              h3 Full Screen
-              p#mensajeFullScreen Ocultar Cabecera
+              h3 Share Screen
+              p Screen Mirroring (No Audio)
         li(onclick="monomer.pageShow('#Remoto');")
           div
             div.test_box.fab.z-d1
@@ -48,7 +49,7 @@ html
         li(onclick="openMovie();")
           div
             div.test_box.fab.z-d1
-              i.icon-film.icon-1x.icon-black.control
+              i.icon-film.icon-1x.icon-black
           div
             div
               h3.controlTitle Pelicula

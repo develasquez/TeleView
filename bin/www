@@ -55,6 +55,9 @@ io.on('connection', function(socket){
   socket.on('end', function(id){
     io.emit('end',id);
   });
+  socket.on('screen', function(video){
+    io.emit('screen',video);
+  });
 });
 /**
  * Normalize a port into a number, string, or false.
