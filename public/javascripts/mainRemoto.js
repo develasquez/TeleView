@@ -8,20 +8,7 @@ var play = 'playVideo';
 var embedUrl = "https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:";
 var playListPattern = "https://open.spotify.com/user/spotify/playlist/";
 
-socket.on('spotifyList', function(spotifyHTML) {
-    $(spotifyHTML).find(".track-row").each(function(i, e) {
-        var dataArtists = $(e).attr("data-artists");
-        var dataName = $(e).attr("data-name");
-        var request = getYoutubeRequest(dataName + " " + dataArtists, '');
-        request.execute(function(response) {
-            setListItems([response.result.items[0]], function() {
-                monomer.hideLoading();
-                localStorage.setItem("resultsList", currentResults);
-            });
 
-        });
-    });
-});
 var createSpotifyPlaylist = function(playListUrl) {
     socket.emit('spotifyList', embedUrl + playListUrl);
 }
@@ -45,7 +32,20 @@ $(function() {
             }
         }));
     });
+    socket.on('spotifyList', function(spotifyHTML) {
+        $(spotifyHTML).find(".track-row").each(function(i, e) {
+            var dataArtists = $(e).attr("data-artists");
+            var dataName = $(e).attr("data-name");
+            var request = getYoutubeRequest(dataName + " " + dataArtists, '');
+            request.execute(function(response) {
+                setListItems([response.result.items[0]], function() {
+                    monomer.hideLoading();
+                    localStorage.setItem("resultsList", currentResults);
+                });
 
+            });
+        });
+    });
 });
 
 openMovie = function() {
