@@ -1,7 +1,6 @@
 var extensionInstalled = true;
 
 var screeCast = function() {
-  debugger;
   // send screen-sharer request to content-script
   if (!extensionInstalled) {
     var message = 'Please install the extension:\n' +
@@ -21,6 +20,7 @@ var screeCast = function() {
 
 // listen for messages from the content-script
 window.addEventListener('message', function(event) {
+  console.log(event);
   if (event.origin != window.location.origin) return;
 
   // content-script will send a 'SS_PING' msg if extension is installed

@@ -5,6 +5,28 @@ var MOVIE = "Movie";
 var pause = 'pauseVideo';
 var play = 'playVideo';
 
+var embedUrl = "https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:";
+var playListPattern = "https://open.spotify.com/user/spotify/playlist/";
+
+socket.on('spotifyList', function(spotifyHTML) {
+    $(spotifyHTML).find(".track-row").each(function(i, e) {
+        var dataArtists = $(e).attr("data-artists");
+        var dataName = $(e).attr("data-name");
+        var request = getYoutubeRequest(dataName + " " + dataArtists, '');
+        request.execute(function(response) {
+            setListItems([response.result.items[0]], function() {
+                monomer.hideLoading();
+                localStorage.setItem("resultsList", currentResults);
+            });
+
+        });
+    });
+});
+var createSpotifyPlaylist = function(playListUrl) {
+    socket.emit('spotifyList', embedUrl + playListUrl);
+}
+
+
 var moviesEndpoint = "http://hdfull.tv/ajax/search.php?q=";
 getNombre = function(url) {
     var nombre = url.split("/")[url.split("/").length - 1].replace(".html", "").replace(/-/g, " ").toUpperCase();
@@ -16,21 +38,25 @@ getNombre = function(url) {
 $(function() {
     socket = io();
     socket.emit('hideQr');
-    socket.on("end", function (id) {
-        playSong(JSON.stringify({id:{videoId: $("#" + id).next().attr("id")}}));
+    socket.on("end", function(id) {
+        playSong(JSON.stringify({
+            id: {
+                videoId: $("#" + id).next().attr("id")
+            }
+        }));
     });
 
 });
 
-openMovie = function(){
+openMovie = function() {
     monomer.showDialog("#urlPelicula");
 };
 
-playMovie = function(){
-    
+playMovie = function() {
+
     var urlPelicula = $("#txtUrlPelicula").val();
     socket.emit('video', urlPelicula);
-    monomer.hideDialog("#urlPelicula"); 
+    monomer.hideDialog("#urlPelicula");
 }
 setUrl = function(canal) {
     socket.emit('cambiarCanal', canal);
@@ -105,14 +131,14 @@ function init() {
         });
 
         $.get("http://ext.juicedev.me/MonkiTV/Canales.json", function(data) {
-            
+
             canales = data;
             for (c in canales) {
                 try {
                     var obj = {
-                        canal: "http://ext.juicedev.me/MonkiTV/#Canal-" + canales[c].nombre.replace(/ /g,"_") +"-" + canales[c].nombre.replace(/ /g,"_") + "-2.0.21" ,
+                        canal: "http://ext.juicedev.me/MonkiTV/#Canal-" + canales[c].nombre.replace(/ /g, "_") + "-" + canales[c].nombre.replace(/ /g, "_") + "-2.0.21",
                         nombre: canales[c].nombre,
-                        img: canales[c].css.replace("background: url(","").replace(")","")
+                        img: canales[c].css.replace("background: url(", "").replace(")", "")
                     }
                     $("#canales").append(listItem(obj));
                 } catch (ex) {}
@@ -244,6 +270,18 @@ function setListItems(items, _fun) {
     }
 }
 
+function getYoutubeRequest(q, PageToken) {
+    return gapi.client.youtube.search.list({
+        q: q,
+        part: 'snippet',
+        type: 'video',
+        maxResults: 20,
+        pageToken: PageToken
+    });
+}
+
+
+
 function buscarVideos(PageToken) {
     if ($("#txtBuscar").val() == "") {
         return false;
@@ -257,13 +295,13 @@ function buscarVideos(PageToken) {
         monomer.showLoading();
     }
     var q = $('#txtBuscar').val();
-    var request = gapi.client.youtube.search.list({
-        q: q,
-        part: 'snippet',
-        type: 'video',
-        maxResults: 20,
-        pageToken: PageToken
-    });
+
+    if (q.indexOf(playListPattern) > -1) {
+        createSpotifyPlaylist(q.replace(playListPattern, ''));
+        return;
+    }
+
+    var request = getYoutubeRequest(q, PageToken);
 
     request.execute(function(response) {
         try {
@@ -347,7 +385,7 @@ function buscarPeliculas() {
                 var newVideo = $(listItemM(item));
                 $(newVideo).data("data", JSON.stringify(item))
                 $(newVideo).on("click", function(a) {
-                    
+
                     var permlalink = JSON.parse($(a.originalEvent.currentTarget).data("data")).permalink;
                     $.ajax(permlalink)
                         .done(function(theHtml) {
@@ -358,7 +396,7 @@ function buscarPeliculas() {
                                 peli.videoId = $(el).prev().find(".embed-container").data("videoid");
                                 peli.titlec = $(el).text().replace(/\s+/g, '').split(":")[3].replace("Enlaceexterno", "")
                             })
-                            
+
                         })
 
                 });

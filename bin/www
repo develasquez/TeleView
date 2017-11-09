@@ -7,15 +7,20 @@
 var app = require('../app');
 var debug = require('debug')('TeleView:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+var request = require("request");
 
 /**
  * Get port from environment and store in Express.
  */
 
+var privateKey = fs.readFileSync('key.pem');
+var certificate = fs.readFileSync('cert.pem');
 
+var credentials = {key: privateKey, cert: certificate, passphrase: 'devenew1'};
 
 var port = normalizePort(process.env.PORT || '3000');
-
 app.set('port', port);
 
 
@@ -23,7 +28,11 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(credentials, app).listen(3443);
+
+app.listen = function() {
+  return server.listen.apply(http.createServer(this), arguments);
+};
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -57,6 +66,11 @@ io.on('connection', function(socket){
   });
   socket.on('screen', function(video){
     io.emit('screen',video);
+  });
+  socket.on('spotifyList', function(url){
+    request(url, function (error, response, body) {
+      io.emit('spotifyList',body);
+    });
   });
 });
 /**
