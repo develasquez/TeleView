@@ -6,7 +6,7 @@ var pause = 'pauseVideo';
 var play = 'playVideo';
 
 var embedUrl = "https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:";
-var playListPattern = "https://open.spotify.com/user/spotify/playlist/";
+var playListPattern = "open.spotify.com";
 
 
 var createSpotifyPlaylist = function(playListUrl) {
@@ -297,7 +297,7 @@ function buscarVideos(PageToken) {
     var q = $('#txtBuscar').val();
 
     if (q.indexOf(playListPattern) > -1) {
-        createSpotifyPlaylist(q.replace(playListPattern, ''));
+        createSpotifyPlaylist(q.split("/")[q.split("/").length -1]);
         return;
     }
 
