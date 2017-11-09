@@ -20,7 +20,6 @@ var screeCast = function() {
 
 // listen for messages from the content-script
 window.addEventListener('message', function(event) {
-  console.log(event);
   if (event.origin != window.location.origin) return;
 
   // content-script will send a 'SS_PING' msg if extension is installed

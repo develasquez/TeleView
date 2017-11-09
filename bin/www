@@ -57,8 +57,7 @@ io.on('connection', function(socket){
     try{
       console.log(url);
       request(url, function (error, response, body) {
-        console.log("error", error);
-        console.log("response", response);
+        console.error("error", error);
         io.emit('spotifyList',body);
       });
     }catch(ex){
