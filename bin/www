@@ -54,9 +54,16 @@ io.on('connection', function(socket){
     io.emit('screen',video);
   });
   socket.on('spotifyList', function(url){
-    request(url, function (error, response, body) {
-      io.emit('spotifyList',body);
-    });
+    try{
+      console.log(url);
+      request(url, function (error, response, body) {
+        console.log("error", error);
+        console.log("response", response);
+        io.emit('spotifyList',body);
+      });
+    }catch(ex){
+
+    }
   });
 });
 /**

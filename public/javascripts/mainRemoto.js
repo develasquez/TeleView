@@ -23,7 +23,7 @@ getNombre = function(url) {
     return nombre
 }
 $(function() {
-    socket = io();
+    socket = io.content();
     socket.emit('hideQr');
     socket.on("end", function(id) {
         playSong(JSON.stringify({
