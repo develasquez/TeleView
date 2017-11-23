@@ -159,6 +159,10 @@ function init() {
 
 
 $(function() {
+    $(".share").on("click", function(){
+        debugger;
+        $("#file").click();
+    })
     $("#txtBuscar").on("keypress", function(evt) {
         if (evt.charCode == 13) {
             $("#btnBuscar").click();
