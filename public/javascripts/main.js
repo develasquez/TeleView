@@ -5,11 +5,17 @@ var canal = 0;
 var youtube = false;
 var move = true;
 var fullScreen = false;
+var enableRandom = true;
 
 function changeBackgroud() {
     setInterval(function() {
-        $("#tele").css("background", "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')");
-    }, 60 * 1000)
+        debugger;
+        if (enableRandom) {
+
+            $("#tele").css({"background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "');"});
+        }
+
+    }, 60 * 1000);
 }
 
 function toggleFullScreen() {
@@ -82,7 +88,7 @@ setUrl = function(p_canal) {
         monomer.__setAspect();
     } else {
         youtube = true;
-        $("#tele").append($("<div class=\"aspect_16_9\">").attr("id","player"));
+        $("#tele").append($("<div class=\"aspect_16_9\">").attr("id", "player"));
         player = new YT.Player('player', {
             height: window.innerHeight,
             width: _window.width,
@@ -123,7 +129,20 @@ $(function() {
         hideQr();
         setUrl(canal)
     });
+    socket.on('image', function(image) {
+        debugger;
+        var arrayBufferView = new Uint8Array(image);
+        var blob = new Blob([arrayBufferView], {
+            type: "image/jpeg"
+        });
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(blob);
 
+
+        $("#tele").css({"background": "url('" + imageUrl + "')", "background-size" : "100%", "background-repeat" : "no-repeat"});
+        socket.emit('successImage',{});
+
+    });
     socket.on('toggleYoutube', function(acction) {
         hideQr();
         var video = document.getElementsByTagName("video")[0];

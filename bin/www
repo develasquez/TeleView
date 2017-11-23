@@ -28,38 +28,44 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 var io = require('socket.io').listen(server);
-io.on('connection', function(socket){
-  socket.on('cambiarCanal', function(canal){
+io.on('connection', function(socket) {
+  socket.on('cambiarCanal', function(canal) {
     io.emit('cambiarCanal', canal);
   });
-  socket.on('fullScreen', function(){
+  socket.on('fullScreen', function() {
     io.emit('fullScreen');
   });
-  socket.on('hideQr', function(){
+  socket.on('hideQr', function() {
     io.emit('hideQr');
   });
-  socket.on('toggleYoutube', function(acction){
+  socket.on('toggleYoutube', function(acction) {
     io.emit('toggleYoutube', acction);
   });
-  socket.on('video', function(videoUrl){
+  socket.on('video', function(videoUrl) {
     io.emit('video', videoUrl);
   });
-  socket.on('tele', function(){
+  socket.on('tele', function() {
     io.emit('tele');
   });
-  socket.on('end', function(id){
-    io.emit('end',id);
+  socket.on('end', function(id) {
+    io.emit('end', id);
   });
-  socket.on('screen', function(video){
-    io.emit('screen',video);
+  socket.on('screen', function(video) {
+    io.emit('screen', video);
   });
-  socket.on('spotifyList', function(url){
-    try{
-      request(url, function (error, response, body) {
+  socket.on('image', function(image) {
+    io.emit('image', image);
+  });
+  socket.on('successImage', function(successImage) {
+    io.emit('successImage', successImage);
+  });
+  socket.on('spotifyList', function(url) {
+    try {
+      request(url, function(error, response, body) {
         console.error("error", error);
-        io.emit('spotifyList',body);
+        io.emit('spotifyList', body);
       });
-    }catch(ex){
+    } catch (ex) {
 
     }
   });
@@ -93,9 +99,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -118,8 +122,6 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
