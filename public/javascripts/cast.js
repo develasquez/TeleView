@@ -59,7 +59,7 @@ function startScreenStreamFrom(streamId) {
       setInterval(function() {
         cvs.getContext("2d").drawImage(videoElement, 0, 0, 1366, 768);
         cvs.toBlob(function(blob) {
-          socket.emit("img", {
+          socket.emit("image", {
             img: blob
           });
         });
