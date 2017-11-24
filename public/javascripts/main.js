@@ -7,6 +7,7 @@ var move = true;
 var fullScreen = false;
 var enableRandom = true;
 var backgroundTimeout = null;
+var peer = null; 
 
 function changeBackgroud(secons) {
     return setInterval(function() {
@@ -113,6 +114,7 @@ setUrl = function(p_canal) {
 var player;
 var socket;
 $(function() {
+    peer = new Peer('id', {key: 'auc90yy633ngsyvi'}); 
     showQr();
 
     // 2. This code loads the IFrame Player API code asynchronously.

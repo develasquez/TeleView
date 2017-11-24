@@ -4,6 +4,7 @@ var canal = 0;
 var MOVIE = "Movie";
 var pause = 'pauseVideo';
 var play = 'playVideo';
+var peer = null; 
 
 var embedUrl = "https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:";
 var playListPattern = "open.spotify.com";
@@ -182,7 +183,7 @@ $(function() {
 
 
 
-    var peer = new Peer('id', {key: 'auc90yy633ngsyvi'}); 
+    peer = new Peer('id', {key: 'auc90yy633ngsyvi'}); 
 
 
     (function(e, t, n) {
