@@ -6,7 +6,7 @@ var youtube = false;
 var move = true;
 var fullScreen = false;
 var enableRandom = true;
-var backgroundTimeout;
+var backgroundTimeout = null;
 function changeBackgroud(secons) {
     return setInterval(function() {
             $("#tele").css({"background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')"});
