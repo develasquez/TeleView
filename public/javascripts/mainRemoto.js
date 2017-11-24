@@ -286,6 +286,8 @@ $(function() {
                         Array.prototype.forEach.call(droppedFiles, function(file) {
                             socket.emit('image', file);
                         });
+                        droppedFiles = false;
+                        $("#file").val("");
                     }
 
                     //send by socket

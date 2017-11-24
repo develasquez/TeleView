@@ -9,10 +9,10 @@ var enableRandom = true;
 
 function changeBackgroud() {
     setInterval(function() {
-        debugger;
+        
         if (enableRandom) {
 
-            $("#tele").css({"background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "');"});
+            $("#tele").css({"background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')"});
         }
 
     }, 60 * 1000);
@@ -130,16 +130,16 @@ $(function() {
         setUrl(canal)
     });
     socket.on('image', function(image) {
-        debugger;
+        
         var arrayBufferView = new Uint8Array(image);
         var blob = new Blob([arrayBufferView], {
             type: "image/jpeg"
         });
         var urlCreator = window.URL || window.webkitURL;
         var imageUrl = urlCreator.createObjectURL(blob);
-
-
-        $("#tele").css({"background": "url('" + imageUrl + "')", "background-size" : "100%", "background-repeat" : "no-repeat"});
+        
+        enableRandom = false;
+        $("#tele").css({"background": "url('" + imageUrl + "')", "background-size" : "auto 100%", "background-repeat" : "no-repeat","background-position":"center"});
         socket.emit('successImage',{});
 
     });
