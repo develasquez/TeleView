@@ -281,6 +281,7 @@ $(function() {
 
                     // gathering the form data
                     var ajaxData = new FormData(form);
+                    droppedFiles = droppedFiles || file.files;
                     if (droppedFiles) {
                         Array.prototype.forEach.call(droppedFiles, function(file) {
                             socket.emit('image', file);
