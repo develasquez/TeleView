@@ -158,6 +158,13 @@ $(function() {
             "background-position": "center"
         });
     });
+    peer.on('call', function(call) {
+        call.on('stream', function(remoteStream) {
+            videoElement = document.getElementById('video');
+            videoElement.src = URL.createObjectURL(remoteStream);
+            videoElement.play();
+        });
+    });
     socket.on('toggleYoutube', function(acction) {
         hideQr();
         var video = document.getElementsByTagName("video")[0];

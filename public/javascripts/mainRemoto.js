@@ -160,7 +160,6 @@ function init() {
 
 $(function() {
     $(".share").on("click", function(){
-        debugger;
         $("#file").click();
     })
     $("#txtBuscar").on("keypress", function(evt) {
@@ -180,6 +179,12 @@ $(function() {
             buscarVideos(nextPageToken);
         }
     });
+
+
+
+    var peer = new Peer('id', {key: 'auc90yy633ngsyvi'}); 
+
+
     (function(e, t, n) {
         var r = e.querySelectorAll("html")[0];
         r.className = r.className.replace(/(^|\s)no-js(\s|$)/, "$1js$2")

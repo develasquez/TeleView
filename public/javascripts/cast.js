@@ -40,7 +40,7 @@ window.addEventListener('message', function(event) {
 
 function startScreenStreamFrom(streamId) {
   navigator.webkitGetUserMedia({
-      audio: false,
+      audio: true,
       video: {
         mandatory: {
           chromeMediaSource: 'desktop',
@@ -52,16 +52,7 @@ function startScreenStreamFrom(streamId) {
     },
     // successCallback
     function(screenStream) {
-      var videoElement = document.createElement("video");
-      videoElement.src = URL.createObjectURL(screenStream);
-      videoElement.play();
-      cvs = document.createElement("canvas");
-      setInterval(function() {
-        cvs.getContext("2d").drawImage(videoElement, 0, 0, 1366, 768);
-        socket.emit("cast", {
-          img: cvs.toDataURL()
-        });
-      }, 10);
+      var call = peer.call('id', screenStream);
     },
     // errorCallback
     function(err) {
