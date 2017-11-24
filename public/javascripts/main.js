@@ -7,10 +7,13 @@ var move = true;
 var fullScreen = false;
 var enableRandom = true;
 var backgroundTimeout = null;
+
 function changeBackgroud(secons) {
     return setInterval(function() {
-            $("#tele").css({"background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')"});
-        
+        $("#tele").css({
+            "background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')"
+        });
+
     }, secons * 1000);
 }
 
@@ -126,20 +129,34 @@ $(function() {
         setUrl(canal)
     });
     socket.on('image', function(image) {
-        
+
         var arrayBufferView = new Uint8Array(image);
         var blob = new Blob([arrayBufferView], {
             type: "image/jpeg"
         });
         var urlCreator = window.URL || window.webkitURL;
         var imageUrl = urlCreator.createObjectURL(blob);
-        
+
         clearInterval(backgroundTimeout)
         backgroundTimeout = changeBackgroud(300);
         $("#tele").html("");
-        $("#tele").css({"background": "url('" + imageUrl + "')", "background-size" : "auto 100%", "background-repeat" : "no-repeat","background-position":"center"});
-        socket.emit('successImage',{});
+        $("#tele").css({
+            "background": "url('" + imageUrl + "')",
+            "background-size": "auto 100%",
+            "background-repeat": "no-repeat",
+            "background-position": "center"
+        });
+        socket.emit('successImage', {});
 
+    });
+    socket.on('cast', function(image) {
+        $("#tele").html("");
+        $("#tele").css({
+            "background": "url('" + imageUrl + "')",
+            "background-size": "auto 100%",
+            "background-repeat": "no-repeat",
+            "background-position": "center"
+        });
     });
     socket.on('toggleYoutube', function(acction) {
         hideQr();

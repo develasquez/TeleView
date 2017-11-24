@@ -50,8 +50,8 @@ io.on('connection', function(socket) {
   socket.on('end', function(id) {
     io.emit('end', id);
   });
-  socket.on('screen', function(video) {
-    io.emit('screen', video);
+  socket.on('cast', function(video) {
+    io.emit('cast', video);
   });
   socket.on('image', function(image) {
     io.emit('image', image);
