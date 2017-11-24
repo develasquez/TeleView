@@ -114,7 +114,7 @@ setUrl = function(p_canal) {
 var player;
 var socket;
 $(function() {
-    peer = new Peer('id', {key: 'auc90yy633ngsyvi'}); 
+
     showQr();
 
     // 2. This code loads the IFrame Player API code asynchronously.
@@ -158,13 +158,6 @@ $(function() {
             "background-size": "auto 100%",
             "background-repeat": "no-repeat",
             "background-position": "center"
-        });
-    });
-    peer.on('call', function(call) {
-        call.on('stream', function(remoteStream) {
-            videoElement = document.getElementById('video');
-            videoElement.src = URL.createObjectURL(remoteStream);
-            videoElement.play();
         });
     });
     socket.on('toggleYoutube', function(acction) {

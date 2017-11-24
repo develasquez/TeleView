@@ -52,7 +52,10 @@ function startScreenStreamFrom(streamId) {
     },
     // successCallback
     function(screenStream) {
-      var call = peer.call('id', screenStream);
+      var videoElement = document.createElement("video");
+      videoElement.src = URL.createObjectURL(screenStream);
+      videoElement.play();
+      
     },
     // errorCallback
     function(err) {
