@@ -58,8 +58,10 @@ function startScreenStreamFrom(streamId) {
       cvs = document.createElement("canvas");
       setInterval(function() {
         cvs.getContext("2d").drawImage(videoElement, 0, 0, 1366, 768);
-        socket.emit("screen", {
-          img: cvs.toDataURL()
+        canvas.toBlob(function(blob) {
+          socket.emit("img", {
+            img: blob
+          });
         });
       }, 10);
     },
