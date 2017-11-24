@@ -6,16 +6,12 @@ var youtube = false;
 var move = true;
 var fullScreen = false;
 var enableRandom = true;
-
-function changeBackgroud() {
-    setInterval(function() {
-        
-        if (enableRandom) {
-
+var backgroundTimeout;
+function changeBackgroud(secons) {
+    return setInterval(function() {
             $("#tele").css({"background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')"});
-        }
-
-    }, 60 * 1000);
+        
+    }, secons * 1000);
 }
 
 function toggleFullScreen() {
@@ -123,7 +119,7 @@ $(function() {
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    changeBackgroud();
+    backgroundTimeout = changeBackgroud(60);
     socket = io();
     socket.on('cambiarCanal', function(canal) {
         hideQr();
@@ -138,7 +134,8 @@ $(function() {
         var urlCreator = window.URL || window.webkitURL;
         var imageUrl = urlCreator.createObjectURL(blob);
         
-        enableRandom = false;
+        clearInterval(backgroundTimeout)
+        backgroundTimeout = changeBackgroud(300);
         $("#tele").css({"background": "url('" + imageUrl + "')", "background-size" : "auto 100%", "background-repeat" : "no-repeat","background-position":"center"});
         socket.emit('successImage',{});
 
