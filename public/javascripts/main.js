@@ -72,7 +72,7 @@ getNombre = function(url) {
 }
 setUrl = function(p_canal) {
     var iframe = "<iframe  id=\"ifTV\" width=\"600\" height=\"385\" scrolling=\"no\" frameborder=\"0\" scrolling=\"no\" allowtransparency=\"true\" marginwidth=\"0\" marginheight=\"0\"  class=\"aspect_16_9\"></iframe>";
-    $("#tele").html("")
+    $("#tele").html("");
     var source = "";
     if (typeof(p_canal) == "number") {
         canal = p_canal;
@@ -136,6 +136,7 @@ $(function() {
         
         clearInterval(backgroundTimeout)
         backgroundTimeout = changeBackgroud(300);
+        $("#tele").html("");
         $("#tele").css({"background": "url('" + imageUrl + "')", "background-size" : "auto 100%", "background-repeat" : "no-repeat","background-position":"center"});
         socket.emit('successImage',{});
 
