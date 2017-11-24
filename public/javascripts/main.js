@@ -152,7 +152,7 @@ $(function() {
     socket.on('cast', function(image) {
         $("#tele").html("");
         $("#tele").css({
-            "background": "url('" + image + "')",
+            "background": "url('" + image.img + "')",
             "background-size": "auto 100%",
             "background-repeat": "no-repeat",
             "background-position": "center"
