@@ -19,7 +19,7 @@ Esto iniciará un servidor en el puerto 3000 al cual puedes acceder desde el nav
 
 Para acceder al control remoto desde tu celular ingresa con la IP de tu PC/RaspBerry 
 
-[http://<IP>:3000/remoto](http://127.0.0.1:3000/remoto)
+[http://IP:3000/remoto](http://127.0.0.1:3000/remoto)
 
 ![Control Remoto](https://github.com/develasquez/TeleView/blob/master/images/2.png?raw=true)
 
