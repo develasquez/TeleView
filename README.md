@@ -14,7 +14,7 @@ Esto iniciará un servidor en el puerto 3000 al cual puedes acceder desde el nav
 
 [http://localhost:3000](http://localhost:3000)
 
-![Home](https://github.com/develasquez/TeleView/blob/master/images/1.png?raw=true =640x)
+![Home](https://github.com/develasquez/TeleView/blob/master/images/1.png?raw=true =640x480)
 
 
 Para acceder al control remoto desde tu celular ingresa con la IP de tu PC/RaspBerry 
