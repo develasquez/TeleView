@@ -41,4 +41,11 @@ res.render('remote', { title: 'Control Remoto' });
 
 });
 
+router.get('/remoto/cast/', function(req, res, next) {
+  var socket = require("../controllers/socket");
+  socket.io().emit("video", req.query.url); 
+  res.render('remote', { title: 'Control Remoto' });
+});
+
+
 module.exports = router;
