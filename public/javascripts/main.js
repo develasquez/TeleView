@@ -13,7 +13,10 @@ var peer = null;
 function changeBackgroud(secons) {
     return setInterval(function() {
         $("#tele").css({
-            "background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')"
+            "background": "url('https://picsum.photos/1920/1080/?random&r=" + parseInt(Math.random() * 1000) + "')",
+            "background-size": "auto 100%",
+            "background-repeat": "no-repeat",
+            "background-position": "center"
         });
 
     }, secons * 1000);
