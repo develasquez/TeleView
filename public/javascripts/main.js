@@ -9,13 +9,6 @@ var enableRandom = true;
 var backgroundTimeout = null;
 var peer = null; 
 
-function firstReload(){
-    if(!sessionStorage.getItem("reload")){
-        sessionStorage.setItem("reload","true");
-        document.location.href = document.location.href + "?time=" + (new Date());
-    }
-}
-firstReload();
 
 function changeBackgroud(secons) {
     return setInterval(function() {
