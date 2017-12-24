@@ -1,4 +1,5 @@
 var express = require('express');
+var socket = require("../controllers/socket");
 
 var router = express.Router();
 
@@ -20,7 +21,7 @@ Object.keys(ifaces).forEach(function (ifname) {
       return;
     }
     if(ip.length > 0 ){
-    	return;
+      return;
     }
     
     ip =  iface.address;
@@ -42,9 +43,20 @@ res.render('remote', { title: 'Control Remoto' });
 });
 
 router.get('/remoto/cast/', function(req, res, next) {
-  var socket = require("../controllers/socket");
   socket.io().emit("video", req.query.url); 
-  res.render('remote', { title: 'Control Remoto' });
+  res.send({});
+});
+
+
+router.get('/remoto/pause/', function(req, res, next) {
+  socket.io().emit("toggleYoutube"); 
+  res.send({});
+});
+
+
+router.post('/remoto/image/', function(req, res, next) {
+  socket.io().emit("cast", {img:req.body.img}); 
+  res.send({});
 });
 
 

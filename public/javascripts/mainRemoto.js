@@ -137,7 +137,7 @@ function init() {
         });
 
         $.get("https://ext.juicedev.me/MonkiTV/Canales.json", function(data) {
-
+            debugger;
             canales = data;
             for (c in canales) {
                 try {
