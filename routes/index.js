@@ -45,7 +45,7 @@ res.render('remote', { title: 'Control Remoto' });
 router.get('/remoto/cast/', function(req, res, next) {
 
   debugger;
-  socket.io().emit("video", req.query.url + req.query.tctx ? req.query.tctx : ""); 
+  socket.io().emit("video", req.query.url); 
   res.send({});
 });
 
