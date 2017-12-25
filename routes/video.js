@@ -6,7 +6,9 @@ var socket = require("../controllers/socket");
 /* GET users listing. */
 router.get('/:video', function(req, res, next) {
 	var video = req.params.video;
+
 	request(video, function(err, data, body) {
+		debugger;
 		$ = cheerio.load(body);
 		var videoUrl = $("video").attr("src") || video;
 		socket.io().emit("video", videoUrl);

@@ -87,6 +87,7 @@ setUrl = function(p_canal) {
     var iframe = "<iframe  id=\"ifTV\" width=\"600\" height=\"385\" scrolling=\"no\" frameborder=\"0\" scrolling=\"no\" allowtransparency=\"true\" marginwidth=\"0\" marginheight=\"0\"  class=\"aspect_16_9\"></iframe>";
     $("#tele").html("");
     var source = "";
+    debugger;
     if (typeof(p_canal) == "number") {
         canal = p_canal;
         localStorage.setItem("canal", canal);
@@ -210,7 +211,7 @@ $(function() {
         }
 
         hideQr();
-        document.location.href = "/video/" + encodeURIComponent(videoUrl);
+        setUrl(videoUrl);
     });
     socket.on('tele', function(videoUrl) {
         hideQr();
