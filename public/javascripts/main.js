@@ -100,7 +100,7 @@ setUrl = function(p_canal) {
     } else {
 
         if (p_canal.indexOf("http") > -1) {
-            $("#tele").append($("video").attr("src", p_canal));
+            $("#tele").append($("<video>").attr({"src": p_canal, "controls": true}));
             monomer.__setAspect();
         } else {
 
