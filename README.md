@@ -19,7 +19,7 @@ Esto iniciará un servidor en el puerto 3000 al cual puedes acceder desde el nav
 
 Para acceder al control remoto desde tu celular ingresa con la IP de tu PC/RaspBerry 
 
-Si tienes un lector de códigos en tu dispositivo puedes acceder más fácilmente al control remoto.
+Si tienes un lector de códigos QR en tu dispositivo puedes acceder más fácilmente al control remoto.
 
 [http://192.168.1.123:3000/remoto](http://127.0.0.1:3000/remoto)
 
