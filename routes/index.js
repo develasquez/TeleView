@@ -1,8 +1,5 @@
 var express = require('express');
 var socket = require("../controllers/socket");
-var cheerio = require("cheerio");
-var request = require("request");
-var Promise = require("bluebird");
 var router = express.Router();
 
 /* GET home page. */
@@ -51,7 +48,9 @@ router.get('/remoto', function(req, res, next) {
 });
 
 router.get('/remoto/cast/', function(req, res, next) {
-  socket.io().emit("video", decodeURI(req.query.url));
+  var b = new Buffer(req.query.url, 'base64')
+  var s = b.toString();
+  socket.io().emit("video", s);
   res.send({});
 });
 
