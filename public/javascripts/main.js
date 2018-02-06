@@ -215,7 +215,7 @@ $(function() {
         for (c in data) {
             try {
                 var obj = {
-                    canal: "https://ext.juicedev.me/MonkiTV/#Canal-" + data[c].nombre.replace(/ /g, "_") + "-" + data[c].nombre.replace(/ /g, "_") + "-2.0.21",
+                    canal: "http://ext.juicedev.me/MonkiTV/#Canal-" + data[c].nombre.replace(/ /g, "_") + "-" + data[c].nombre.replace(/ /g, "_") + "-2.0.21",
                     nombre: data[c].nombre,
                     img: data[c].css.replace("background: url(", "").replace(")", "").replace("http", "https")
                 }
