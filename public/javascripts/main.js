@@ -81,7 +81,7 @@ setUrl = function(p_canal) {
     $("#tele").html("");
     var source = "";
     var chanel = canales.filter(function(c){ return c.nombre == p_canal});
-    if (chanel) {
+    if (chanel.length > 0) {
         localStorage.setItem("canal", chanel[0].nombre);
         youtube = false;
         $("#tele").append($(iframe).attr("src", chanel[0].canal));
