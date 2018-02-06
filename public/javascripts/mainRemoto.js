@@ -142,7 +142,7 @@ function init() {
             for (c in canales) {
                 try {
                     var obj = {
-                        canal: "https://ext.juicedev.me/MonkiTV/#Canal-" + canales[c].nombre.replace(/ /g, "_") + "-" + canales[c].nombre.replace(/ /g, "_") + "-2.0.21",
+                        canal: "http://ext.juicedev.me/MonkiTV/#Canal-" + canales[c].nombre.replace(/ /g, "_") + "-" + canales[c].nombre.replace(/ /g, "_") + "-2.0.21",
                         nombre: canales[c].nombre,
                         img: canales[c].css.replace("background: url(", "").replace(")", "").replace("http:","https:")
                     }
