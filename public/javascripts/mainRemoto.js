@@ -92,7 +92,7 @@ var canales = [];
 
 listItem = function(data) {
     return [
-        '<a href="javascript:void(0)"  onClick="setUrl(\'' + data.canal + '\')">',
+        '<a href="javascript:void(0)"  onClick="setUrl(\'' + data.nombre + '\')">',
         '          <li>',
         '            <div>',
         '              <div class="test_box fab z-d1">',
@@ -137,7 +137,7 @@ function init() {
         });
 
         $.get("https://ext.juicedev.me/MonkiTV/Canales.json", function(data) {
-            debugger;
+            
             canales = data;
             for (c in canales) {
                 try {
@@ -180,11 +180,6 @@ $(function() {
             buscarVideos(nextPageToken);
         }
     });
-
-
-
-    
-
 
     (function(e, t, n) {
         var r = e.querySelectorAll("html")[0];

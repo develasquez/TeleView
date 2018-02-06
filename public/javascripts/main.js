@@ -71,14 +71,6 @@ hideQr = function() {
 
 
 
-getNombre = function(url) {
-    var nombre = url.split("/")[url.split("/").length - 1].replace(".html", "").replace(/-/g, " ").toUpperCase();
-    if (nombre.split("|").length > 0) {
-        nombre = nombre.split("|")[nombre.split("|").length - 1];
-    }
-    return nombre
-}
-
 function getQueryParams(url) {
     for (var e = {}, t = (url || window.location.href).slice((url || window.location.href).replace("#", "").indexOf("?") + 1).split("&"), n = void 0, r = 0; r < t.length; r++) n = t[r].split("="), e[n[0]] = n[1];
     return e
@@ -88,20 +80,20 @@ setUrl = function(p_canal) {
     var iframe = "<iframe  id=\"ifTV\" width=\"600\" height=\"385\" scrolling=\"no\" frameborder=\"0\" scrolling=\"no\" allowtransparency=\"true\" marginwidth=\"0\" marginheight=\"0\"  class=\"aspect_16_9\"></iframe>";
     $("#tele").html("");
     var source = "";
-    debugger;
-    if (typeof(p_canal) == "number") {
-        canal = p_canal;
-        localStorage.setItem("canal", canal);
-        debugger;
-        source = canales[canal][0];
+    var chanel = canales.filter(function(c){ return c.nombre == p_canal});
+    if (chanel) {
+        localStorage.setItem("canal", chanel[0].nombre);
         youtube = false;
-        $("#tele").append($(iframe).attr("src", source));
-        $(".canal").text(getNombre(canales[canal][0]));
+        $("#tele").append($(iframe).attr("src", chanel[0].canal));
+        $(".canal").text(chanel[0].nombre);
         monomer.__setAspect();
     } else {
 
         if (p_canal.indexOf("http") > -1) {
-            $("#tele").append($("<video>").attr({"src": p_canal, "controls": true}));
+            $("#tele").append($("<video>").attr({
+                "src": p_canal,
+                "controls": true
+            }));
             monomer.__setAspect();
         } else {
 
@@ -148,7 +140,7 @@ $(function() {
     socket = io();
     socket.on('cambiarCanal', function(canal) {
         hideQr();
-        debugger;
+
         setUrl(canal)
     });
     socket.on('image', function(image) {
@@ -219,7 +211,18 @@ $(function() {
         document.location.href = "/";
     });
     $.get("https://ext.juicedev.me/MonkiTV/Canales.json", function(data) {
-        canales = data;
+
+        for (c in data) {
+            try {
+                var obj = {
+                    canal: "https://ext.juicedev.me/MonkiTV/#Canal-" + data[c].nombre.replace(/ /g, "_") + "-" + data[c].nombre.replace(/ /g, "_") + "-2.0.21",
+                    nombre: data[c].nombre,
+                    img: data[c].css.replace("background: url(", "").replace(")", "").replace("http", "https")
+                }
+                
+                canales.push(obj);
+            } catch (ex) {}
+        }
     });
     $("#btnShowBarr").click(function() {
         showHeader();
