@@ -13,6 +13,11 @@
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
+
+#tele video { 
+	width: 100%;
+	height: 100%;
+}
 .test_box.fab.z-d1 img {
     width: 100%;
 }
